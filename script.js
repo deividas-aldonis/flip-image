@@ -1,4 +1,4 @@
-const flipImageWrapper = document.querySelector(".image-container");
+const imageWrapper = document.querySelector(".image");
 const addImageBtn = document.querySelector(".add-image-btn");
 const addImageInput = document.querySelector(".add-image-input");
 
@@ -6,11 +6,11 @@ function showErrorImg() {
   const errorImg = new Image();
   errorImg.classList.add("image-cover");
   errorImg.src = "./error.webp";
-  flipImageWrapper.appendChild(errorImg);
+  imageWrapper.appendChild(errorImg);
 }
 
 function addImage() {
-  flipImageWrapper.textContent = "";
+  imageWrapper.textContent = "";
 
   const url = addImageInput.value;
 
@@ -24,7 +24,7 @@ function addImage() {
   img.src = url;
 
   img.onerror = showErrorImg;
-  img.onload = () => flipImageWrapper.appendChild(img);
+  img.onload = () => imageWrapper.appendChild(img);
 }
 
 addImageBtn.addEventListener("click", addImage);

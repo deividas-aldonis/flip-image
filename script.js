@@ -27,16 +27,25 @@ button.addEventListener("click", () => {
 
   const image = new Image();
   image.src = inputValue;
-  //   image.src = "error.webp";
 
   image.addEventListener("error", () => {
     console.log("failed to load");
   });
 
   image.addEventListener("load", () => {
+    const imageExists = document.querySelector(".image");
+    if (imageExists) imageExists.remove();
+
     const div = document.createElement("div");
     div.classList.add("image");
     div.addEventListener("click", setSelectedImage);
+
+    const containerWidth = parseFloat(getComputedStyle(container).width);
+
+    if (containerWidth < image.width) {
+      image.height = (image.height / image.width) * containerWidth;
+      image.width = containerWidth;
+    }
 
     div.style.height = image.height + "px";
     div.style.width = image.width + "px";
@@ -72,6 +81,8 @@ button.addEventListener("click", () => {
     container.insertAdjacentElement("afterbegin", div);
     controls.classList.remove("hide");
   });
+
+  input.value = "";
 });
 
 controls.addEventListener("click", (e) => {
@@ -147,4 +158,14 @@ controls.addEventListener("click", (e) => {
       imageToChange.style.transform = `scaleY(1) scaleX(${imageScaleX})`;
     }
   }
+});
+
+window.addEventListener("click", (e) => {
+  if (e.target.closest(".image") || e.target.closest(".arrow")) return;
+
+  document.querySelectorAll(".sliced-image").forEach((img, i) => {
+    img.classList.remove("selected");
+  });
+
+  selected = null;
 });

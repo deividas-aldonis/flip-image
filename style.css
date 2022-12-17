@@ -2,6 +2,18 @@
   box-sizing: border-box;
 }
 
+.container,
+.input {
+  width: 75%;
+  margin-inline: auto;
+}
+
+.controls,
+.input {
+  display: flex;
+  justify-content: center;
+}
+
 .image {
   display: grid;
   grid-template-columns: 1fr 1fr;

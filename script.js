@@ -11,11 +11,10 @@ const setSelectedImage = (e) => {
 
   const id = Number(slicedImage.dataset.id);
 
-  console.log(id);
   document.querySelectorAll(".sliced-image").forEach((img, i) => {
-    console.log(i);
     if (i === id) {
       img.classList.add("selected");
+      selected = id;
     } else {
       img.classList.remove("selected");
     }
@@ -23,12 +22,12 @@ const setSelectedImage = (e) => {
 };
 
 button.addEventListener("click", () => {
-  //   const inputValue = input.value.trim();
-  //   if (inputValue.length === 0) return;
+  const inputValue = input.value.trim();
+  if (inputValue.length === 0) return;
 
   const image = new Image();
-  //   image.src = inputValue;
-  image.src = "error.webp";
+  image.src = inputValue;
+  //   image.src = "error.webp";
 
   image.addEventListener("error", () => {
     console.log("failed to load");
@@ -76,6 +75,76 @@ button.addEventListener("click", () => {
 });
 
 controls.addEventListener("click", (e) => {
-  const arrow = e.target.closest("svg");
+  const arrow = e.target.closest(".arrow");
   if (!arrow) return;
+  if (selected === null) return;
+
+  const { direction } = arrow.dataset;
+  const imageToChange = document.querySelectorAll(".sliced-image")[selected];
+
+  const imageTransform = getComputedStyle(imageToChange).transform;
+  const matrixValues = imageTransform.match(/-?\d+/g);
+
+  const imageScaleX = matrixValues ? matrixValues[0] : "1";
+  const imageScaleY = matrixValues ? matrixValues[3] : "1";
+
+  if (selected === 0) {
+    if (direction === "left") {
+      imageToChange.style.transform = `scaleX(-1) scaleY(${imageScaleY})`;
+    }
+    if (direction === "right") {
+      imageToChange.style.transform = `scaleX(1) scaleY(${imageScaleY})`;
+    }
+    if (direction === "top") {
+      imageToChange.style.transform = `scaleY(-1) scaleX(${imageScaleX})`;
+    }
+    if (direction === "bottom") {
+      imageToChange.style.transform = `scaleY(1) scaleX(${imageScaleX})`;
+    }
+  }
+
+  if (selected === 1) {
+    if (direction === "right") {
+      imageToChange.style.transform = `scaleX(-1) scaleY(${imageScaleY})`;
+    }
+    if (direction === "left") {
+      imageToChange.style.transform = `scaleX(1) scaleY(${imageScaleY})`;
+    }
+    if (direction === "top") {
+      imageToChange.style.transform = `scaleY(-1) scaleX(${imageScaleX})`;
+    }
+    if (direction === "bottom") {
+      imageToChange.style.transform = `scaleY(1) scaleX(${imageScaleX})`;
+    }
+  }
+
+  if (selected === 2) {
+    if (direction === "left") {
+      imageToChange.style.transform = `scaleX(-1) scaleY(${imageScaleY})`;
+    }
+    if (direction === "right") {
+      imageToChange.style.transform = `scaleX(1) scaleY(${imageScaleY})`;
+    }
+    if (direction === "top") {
+      imageToChange.style.transform = `scaleY(-1) scaleX(${imageScaleX})`;
+    }
+    if (direction === "bottom") {
+      imageToChange.style.transform = `scaleY(1) scaleX(${imageScaleX})`;
+    }
+  }
+
+  if (selected === 3) {
+    if (direction === "right") {
+      imageToChange.style.transform = `scaleX(-1) scaleY(${imageScaleY})`;
+    }
+    if (direction === "left") {
+      imageToChange.style.transform = `scaleX(1) scaleY(${imageScaleY})`;
+    }
+    if (direction === "top") {
+      imageToChange.style.transform = `scaleY(-1) scaleX(${imageScaleX})`;
+    }
+    if (direction === "bottom") {
+      imageToChange.style.transform = `scaleY(1) scaleX(${imageScaleX})`;
+    }
+  }
 });

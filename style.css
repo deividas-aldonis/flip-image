@@ -8,10 +8,6 @@
   grid-template-rows: 1fr 1fr;
 }
 
-.image > div:nth-child(1) {
-  transform: scaleX(-1);
-}
-
 .controls.hide {
   display: none;
 }

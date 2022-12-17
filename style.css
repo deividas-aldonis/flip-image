@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 .image {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -6,4 +10,28 @@
 
 .image > div:nth-child(1) {
   transform: scaleX(-1);
+}
+
+.controls.hide {
+  display: none;
+}
+
+svg {
+  width: 60px;
+}
+
+.left-arrow {
+  transform: rotate(180deg);
+}
+
+.bottom-arrow {
+  transform: rotate(90deg);
+}
+
+.top-arrow {
+  transform: rotate(-90deg);
+}
+
+.selected {
+  border: 2px green solid;
 }
